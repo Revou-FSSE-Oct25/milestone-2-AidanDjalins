@@ -1,3 +1,4 @@
+// DOM declerations
 playerDisplay = document.getElementById("playerDisplay");
 computerDisplay = document.getElementById("computerDisplay");
 playerScoreDisplay = document.getElementById("playerScoreDisplay");
