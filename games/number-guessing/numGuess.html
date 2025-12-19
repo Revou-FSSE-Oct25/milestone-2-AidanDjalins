@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guesser Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+        }
+        
+        .game-container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        
+        input {
+            width: 100px;
+            padding: 5px;
+            font-size: 16px;
+        }
+        
+        button {
+            padding: 5px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        #message {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        #attemptsLeft {
+            margin-top: 10px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <a href="../../index.html" style="text-decoration: none;"><span>Back to Home</span></a>
+
+    <h1>Number Guesser Game</h1>
+    
+    <div class="game-container">
+        <p>I'm thinking of a number between 1 and 100. Can you guess it?</p>
+        <p>You have 5 attempts!</p>
+        
+        <input type="number" id="guessInput" min="1" max="100" placeholder="Enter guess">
+        <button id="guessButton">Guess</button>
+        <button id="restartButton">Restart Game</button>
+        
+        <div id="message"></div>
+        <div id="attemptsLeft"></div>
+    </div>
+
+    <script>
+        // Variables
+        let randomNumber;
+        let attemptsLeft;
+        
+        // Get elements
+        const guessInput = document.getElementById('guessInput');
+        const guessButton = document.getElementById('guessButton');
+        const restartButton = document.getElementById('restartButton');
+        const message = document.getElementById('message');
+        const attemptsDisplay = document.getElementById('attemptsLeft');
+        
+        // Start the game
+        function startGame() {
+            randomNumber = Math.floor(Math.random() * 100) + 1;
+            attemptsLeft = 5;
+            message.textContent = '';
+            guessInput.value = '';
+            guessInput.disabled = false;
+            guessButton.disabled = false;
+            updateAttemptsDisplay();
+        }
+        
+        // Update attempts display
+        function updateAttemptsDisplay() {
+            attemptsDisplay.textContent = 'Attempts left: ' + attemptsLeft;
+        }
+        
+        // Check the guess
+        function checkGuess() {
+            const userGuess = Number(guessInput.value);
+            
+            // Validate input
+            if (!userGuess || userGuess < 1 || userGuess > 100) {
+                message.textContent = 'Please enter a valid number between 1 and 100!';
+                return;
+            }
+            
+            attemptsLeft--;
+            
+            // Check if guess is correct
+            if (userGuess === randomNumber) {
+                message.textContent = '🎉 Correct! You won!';
+                message.style.color = 'green';
+                endGame();
+            } else if (attemptsLeft === 0) {
+                message.textContent = '😞 Game Over! The number was ' + randomNumber;
+                message.style.color = 'red';
+                endGame();
+            } else if (userGuess > randomNumber) {
+                message.textContent = 'Too high! Try again.';
+                message.style.color = 'orange';
+            } else {
+                message.textContent = 'Too low! Try again.';
+                message.style.color = 'orange';
+            }
+            
+            updateAttemptsDisplay();
+            guessInput.value = '';
+        }
+        
+        // End the game
+        function endGame() {
+            guessInput.disabled = true;
+            guessButton.disabled = true;
+        }
+        
+        // Event listeners
+        guessButton.addEventListener('click', checkGuess);
+        restartButton.addEventListener('click', startGame);
+        
+        // Allow Enter key to submit guess
+        guessInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                checkGuess();
+            }
+        });
+        
+        // Start the game when page loads
+        startGame();
+    </script>
+</body>
+</html>
