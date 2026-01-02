@@ -1,0 +1,66 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 50px auto;
+    max-width: 600px;
+}
+
+h1 {
+    margin-bottom: 30px;
+}
+
+#clickButton {
+    width: 200px;
+    height: 200px;
+    font-size: 24px;
+    border-radius: 50%;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin: 20px;
+}
+
+#clickButton:active {
+    transform: scale(0.95);
+}
+
+#clickButton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+#score {
+    font-size: 48px;
+    font-weight: bold;
+    margin: 20px;
+    color: #333;
+}
+
+#timer {
+    font-size: 24px;
+    margin: 20px;
+    color: #666;
+}
+
+#startButton {
+    padding: 10px 30px;
+    font-size: 18px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+#startButton:hover {
+    background-color: #0b7dda;
+}
+
+#gameOver {
+    font-size: 32px;
+    font-weight: bold;
+    color: #f44336;
+    margin: 20px;
+}
