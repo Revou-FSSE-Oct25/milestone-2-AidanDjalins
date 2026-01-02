@@ -51,3 +51,21 @@ This section covers explanation of game flow and logic of number clicker game.
 7. When time runs out, the score (click amount) will be displayed. Click button will be disabled, start button enabled. gameActive set to false. 
 8. The player can click start to play again
 9. Also added cps (clicks per second) display, which takes score value divided by 30, value is fixed to two decimal point (.toFixed(2))
+
+# Project Revision
+
+Certain parts of this project has been revised after 1-on-1 discussion with TL
+
+## Rock-Paper-Scissors Game
+
+1. Added replay feature when the game ends. Selection buttons will be disabled, and a replay button will appear to play the game again
+
+## Number Guessing Game
+
+1. Added 'guessed numbers' section which shows numbers previously guessed.
+2. Previously guessed numbers will have a unique warning message when entered again, and attempts left will not decrease.
+3. Separated the CSS and JS code to it's own separate files for clean code purposes.
+
+## Clicker Game
+
+1. Separated the CSS and JS code to it's own separate files for clean code purposes.
