@@ -38,3 +38,25 @@ h1 {
     font-size: 3.5rem;
     margin: 30px 0;
 }
+
+#replayButton {
+    font-size: 2rem;
+    padding: 15px 40px;
+    margin: 20px 0;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: hsl(120, 60%, 50%);
+    color: white;
+    border: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+#replayButton:hover {
+    background-color: hsl(120, 60%, 40%);
+}
+
+.choices button:disabled {
+    cursor: not-allowed !important;
+    opacity: 0.5;
+}

@@ -1,31 +1,69 @@
-// DOM declerations
+// DOM declarations
 playerDisplay = document.getElementById("playerDisplay");
 computerDisplay = document.getElementById("computerDisplay");
 playerScoreDisplay = document.getElementById("playerScoreDisplay");
 computerScoreDisplay = document.getElementById("computerScoreDisplay");
 finalResult = document.getElementById("finalResult");
 
-// Declare the player and computer's score
-    let humanScore = 0;
-    let computerScore = 0;
-    
-// Computer's choice
-    function getComputerChoice() {
-        
-        let rand = Math.random();
+// Get all game buttons
+const gameButtons = document.querySelectorAll('.choices button');
 
-        if (rand <= 0.33) {
-            return "rock";
-        } else if (rand <= 0.66) {
-            return "paper";
-        } else {
-            return "scissors";
-        }
+// Declare the player and computer's score
+let humanScore = 0;
+let computerScore = 0;
+
+// Computer's choice
+function getComputerChoice() {
+    let rand = Math.random();
+
+    if (rand <= 0.33) {
+        return "rock";
+    } else if (rand <= 0.66) {
+        return "paper";
+    } else {
+        return "scissors";
     }
+}
+
+// Disable game buttons
+function disableGameButtons() {
+    gameButtons.forEach(button => {
+        button.disabled = true;
+        button.style.cursor = 'not-allowed';
+        button.style.opacity = '0.5';
+    });
+}
+
+// Enable game buttons
+function enableGameButtons() {
+    gameButtons.forEach(button => {
+        button.disabled = false;
+        button.style.cursor = 'pointer';
+        button.style.opacity = '1';
+    });
+}
+
+// Reset the game
+function resetGame() {
+    humanScore = 0;
+    computerScore = 0;
+    playerScoreDisplay.textContent = '0';
+    computerScoreDisplay.textContent = '0';
+    playerDisplay.textContent = 'PLAYER: ';
+    computerDisplay.textContent = 'COMPUTER: ';
+    finalResult.textContent = 'BEST TO 5 WINS!';
+    
+    // Remove replay button
+    const replayButton = document.getElementById('replayButton');
+    if (replayButton) {
+        replayButton.remove();
+    }
+    
+    enableGameButtons();
+}
 
 // Function for one round
 function playRound(humanChoice) {
-    
     let result = '';
     const computerChoice = getComputerChoice();
     
@@ -48,8 +86,8 @@ function playRound(humanChoice) {
         }
     }
 
-    playerDisplay.textContent = `YOU CHOSE: ${humanChoice}`;
-    computerDisplay.textContent = `CPU CHOSE: ${computerChoice}`;
+    playerDisplay.textContent = `PLAYER: ${humanChoice.toUpperCase()}`;
+    computerDisplay.textContent = `COMPUTER: ${computerChoice.toUpperCase()}`;
     finalResult.textContent = `${result}`
 
     switch(result) {
@@ -64,10 +102,18 @@ function playRound(humanChoice) {
     }
 
     if (humanScore === 5 || computerScore === 5) {
-        const winner = (humanScore === 5) ? "PLAYER" : "CPU";
+        const winner = (humanScore === 5) ? "PLAYER" : "COMPUTER";
         finalResult.textContent = `${winner} WINS THE GAME!`;
-
+        disableGameButtons();
         
+        // Create and add replay button
+        const replayButton = document.createElement('button');
+        replayButton.id = 'replayButton';
+        replayButton.textContent = '🔄 Play Again';
+        replayButton.onclick = resetGame;
+        
+        // Insert replay button after finalResult
+        finalResult.parentNode.insertBefore(replayButton, finalResult.nextSibling);
     }
 
     console.log(result);
